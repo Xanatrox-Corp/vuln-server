@@ -3,7 +3,7 @@ name: Security SAST scan (Detect vulnerabilities)
 on:
   pull_request:
     branches:
-      - main
+      - master
       - develop
       - preprod
 
