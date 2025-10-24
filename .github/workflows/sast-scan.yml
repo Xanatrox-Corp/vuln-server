@@ -1,11 +1,11 @@
-name: Security SAST scan (Detect vulnerabilitiess)
+name: Security SAST scan (Detect vulnerabilities)
 
 on:
   pull_request:
     branches:
       - master
       - develop
-      - preprod
+      - preprods
 
 jobs:
   semgrep:
@@ -41,10 +41,10 @@ jobs:
       - name: 🚀 Exécution de Semgrep et génération du rapport SARIF
         run: |
           semgrep --config auto --sarif --output semgrep-report.sarif .
-          jq '.runs[0].results | length' semgrep-report.sarif > vuln_count.txt
-          VULN_COUNT=$(cat vuln_count.txt)
-          echo "Nombre de vulnérabilités détectées : $VULN_COUNT"
-          echo "VULN_COUNT=$VULN_COUNT" >> $GITHUB_ENV
+          $semgrepReport = Get-Content semgrep-report.sarif -Raw | ConvertFrom-Json
+          $VULN_COUNT = $semgrepReport.runs[0].results.Count
+          Write-Host "Nombre de vulnérabilités détectées : $VULN_COUNT"
+          "VULN_COUNT=$VULN_COUNT" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: 🧪 List files 3
         run: Get-ChildItem -Force
@@ -57,9 +57,9 @@ jobs:
 
       - name: ✅ Vérification du résultat de l’analyse
         run: |
-          if [ "${VULN_COUNT}" -gt 0 ]; then
-            echo "❌ ${VULN_COUNT} vulnérabilités détectées. CI bloquée."
+          if ($env:VULN_COUNT -gt 0) {
+            Write-Host "❌ $env:VULN_COUNT vulnérabilités détectées. CI bloquée."
             exit 1
-          else
-            echo "✅ Aucune vulnérabilité détectée. CI validée."
-          fi
+          } else {
+            Write-Host "✅ Aucune vulnérabilité détectée. CI validée."
+          }
