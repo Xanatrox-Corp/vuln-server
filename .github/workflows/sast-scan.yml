@@ -7,10 +7,6 @@ on:
       - develop
       - preprod
 
-defaults:
-  run:
-    shell: bash
-
 jobs:
   semgrep:
     runs-on: self-hosted
@@ -23,7 +19,7 @@ jobs:
     steps:
 
       - name: 🧪 List files 1
-        run: ls -la
+        run: Get-ChildItem -Force
 
       - name: 📥 Checkout du code
         uses: actions/checkout@v4
@@ -40,7 +36,7 @@ jobs:
           semgrep --version
       
       - name: 🧪 List files 2
-        run: ls -la
+        run: Get-ChildItem -Force
 
       - name: 🚀 Exécution de Semgrep et génération du rapport SARIF
         run: |
@@ -51,7 +47,7 @@ jobs:
           echo "VULN_COUNT=$VULN_COUNT" >> $GITHUB_ENV
 
       - name: 🧪 List files 3
-        run: ls -la
+        run: Get-ChildItem -Force
 
       - name: ⬆️ Upload Semgrep file as SARIF to GitHub Advanced Security
         uses: github/codeql-action/upload-sarif@v3
@@ -66,4 +62,4 @@ jobs:
             exit 1
           else
             echo "✅ Aucune vulnérabilité détectée. CI validée."
-          fi
+        fi
