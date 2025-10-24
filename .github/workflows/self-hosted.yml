@@ -1,7 +1,9 @@
 name: Hello World (Self-Hosted)
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - master
 
 jobs:
   hello:
