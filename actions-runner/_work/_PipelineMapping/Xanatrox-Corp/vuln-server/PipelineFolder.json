@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "Xanatrox-Corp/vuln-server",
+  "pipelineDirectory": "vuln-server",
+  "workspaceDirectory": "vuln-server\\vuln-server",
+  "repositories": {
+    "Xanatrox-Corp/vuln-server": {
+      "repositoryPath": "vuln-server\\vuln-server",
+      "lastRunOn": "10/24/2025 12:18:37 +02:00"
+    }
+  },
+  "lastRunOn": "10/24/2025 12:18:37 +02:00"
+}
