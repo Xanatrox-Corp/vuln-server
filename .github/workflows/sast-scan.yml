@@ -10,4 +10,4 @@ on:
 
 jobs:
   sast_scan:
-    uses: Xanatrox-Corp/orga-reusable-workflows/.github/workflows/security-reusable-workflows@v1
+    uses: Xanatrox-Corp/orga-reusable-workflows/.github/workflows/security-reusable-workflows.yml@v1
