@@ -1,4 +1,4 @@
-name: Security SAST scan (Detect vulnerabilities)
+name: Security SAST scan (Detect vulnerabilitiess)
 
 on:
   push:
