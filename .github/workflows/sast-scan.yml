@@ -3,7 +3,7 @@ name: Security SAST scan (Detect vulnerabilities)
 on:
   push:
     branches:
-      - main
+      - master
       - develop
       - preprod
       - 'feat/**'
