@@ -7,6 +7,10 @@ on:
       - develop
       - preprod
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   semgrep:
     runs-on: self-hosted
@@ -62,4 +66,4 @@ jobs:
             exit 1
           else
             echo "✅ Aucune vulnérabilité détectée. CI validée."
-          
+          fi
